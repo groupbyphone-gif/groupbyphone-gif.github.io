@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Solutions - Transformando Ideas en Realidad</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* === PALETA DE COLORES PROFESIONAL + SORPRESA === */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --text-primary: #1a202c;
+            --text-secondary: #2d3748;
+            --text-muted: #4a5568;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #3b82f6;
+            --primary-gradient: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            --accent: #ff6b6b;
+            --accent-dark: #ff5252;
+            --accent-light: #ff8787;
+            --accent-gradient: linear-gradient(135deg, #ff6b6b 0%, #ff8787 100%);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            background: var(--bg-primary);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .admin-btn {
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .admin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            padding: 12rem 0 8rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(37, 99, 235, 0.4);
+        }
+
+        .cta-button.accent {
+            background: var(--accent-gradient);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+            margin-left: 1rem;
+        }
+
+        .cta-button.accent:hover {
+            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+        }
+
+        .section-title span {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .services {
+            background: var(--bg-secondary);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--bg-primary);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .price-editor {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .price-editor input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .price-editor button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .price-editor button:hover {
+            background: var(--accent-dark);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            background: var(--bg-primary);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .member-photo {
+            width: 100%;
+            height: 250px;
+            background: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 3rem;
+        }
+
+        .member-info {
+            padding: 1.5rem;
+        }
+
+        .member-info h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .member-info p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .upload-photo {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+
+        .upload-photo:hover {
+            background: var(--primary-dark);
+        }
+
+        .donations {
+            background: var(--bg-secondary);
+        }
+
+        .donation-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .donation-option {
+            background: var(--bg-primary);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .donation-option:hover {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .donation-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .donate-btn {
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .donate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .bank-info {
+            background: var(--bg-primary);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .bank-info h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg-primary);
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .submit-btn {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .admin-tab {
+            padding: 1rem 2rem;
+            background: var(--bg-secondary);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .admin-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .admin-content {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 12px;
+            min-height: 400px;
+        }
+
+        .close-admin {
+            background: var(--error);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .cta-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .cta-button.accent {
+                margin-left: 0;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <div class="logo">NexusSolutions</div>
+            <ul class="nav-links">
+                <li><a href="#services">Servicios</a></li>
+                <li><a href="#team">Equipo</a></li>
+                <li><a href="#donations">Donaciones</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+            <button class="admin-btn" onclick="showAdminPanel()">
+                <i class="fas fa-cog"></i> Panel Admin
+            </button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1>Transformamos Tus Ideas en Realidad Digital</h1>
+                <p>Soluciones innovadoras y personalizadas para impulsar tu negocio hacia el éxito. Combinamos creatividad, tecnología y estrategia para crear experiencias excepcionales.</p>
+                <div class="cta-buttons">
+                    <button class="cta-button" onclick="scrollToSection('services')">
+                        Ver Servicios
+                    </button>
+                    <button class="cta-button accent" onclick="scrollToSection('contact')">
+                        Comenzar Proyecto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Nuestros <span>Servicios</span></h2>
+            <div class="services-grid">
+                <!-- Los servicios se cargarán dinámicamente -->
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="team">
+        <div class="container">
+            <h2 class="section-title">Nuestro <span>Equipo</span></h2>
+            <div class="team-grid">
+                <!-- El equipo se cargará dinámicamente -->
+            </div>
+        </div>
+    </section>
+
+    <section id="donations" class="donations">
+        <div class="container">
+            <h2 class="section-title">Apoya Nuestra <span>Misión</span></h2>
+            <div class="donation-options">
+                <div class="donation-option">
+                    <div class="donation-amount">$10</div>
+                    <p>Apoyo básico para mantener nuestros servicios</p>
+                    <button class="donate-btn" onclick="showDonationModal(10)">Donar</button>
+                </div>
+                <div class="donation-option">
+                    <div class="donation-amount">$25</div>
+                    <p>Nos ayuda a mejorar y crecer</p>
+                    <button class="donate-btn" onclick="showDonationModal(25)">Donar</button>
+                </div>
+                <div class="donation-option">
+                    <div class="donation-amount">$50</div>
+                    <p>Contribución significativa para nuevos proyectos</p>
+                    <button class="donate-btn" onclick="showDonationModal(50)">Donar</button>
+                </div>
+                <div class="donation-option">
+                    <div class="donation-amount">$100</div>
+                    <p>Patrocinador premium con reconocimiento</p>
+                    <button class="donate-btn" onclick="showDonationModal(100)">Donar</button>
+                </div>
+            </div>
+            
+            <div class="bank-info">
+                <h3><i class="fas fa-university"></i> Transferencia Bancaria</h3>
+                <p><strong>Banco:</strong> Banco Nacional Example</p>
+                <p><strong>Cuenta:</strong> 1234-5678-9012-3456</p>
+                <p><strong>Titular:</strong> Nexus Solutions S.A.S.</p>
+                <p><strong>Tipo:</strong> Cuenta Corriente</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Trabajemos <span>Juntos</span></h2>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Nombre Completo</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Asunto</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensaje o Sugerencia</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Enviar Mensaje
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <div id="adminPanel" class="admin-panel">
+        <div class="container">
+            <div class="admin-header">
+                <h2>Panel de Administración</h2>
+                <button class="close-admin" onclick="hideAdminPanel()">
+                    <i class="fas fa-times"></i> Cerrar
+                </button>
+            </div>
+            
+            <div class="admin-tabs">
+                <button class="admin-tab active" onclick="showAdminTab('services')">Servicios</button>
+                <button class="admin-tab" onclick="showAdminTab('team')">Equipo</button>
+                <button class="admin-tab" onclick="showAdminTab('donations')">Donaciones</button>
+                <button class="admin-tab" onclick="showAdminTab('settings')">Configuración</button>
+            </div>
+            
+            <div class="admin-content" id="adminTabContent">
+                <!-- Contenido administrativo se cargará dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let services = JSON.parse(localStorage.getItem('services')) || [
+            {
+                id: 1,
+                name: "Desarrollo Web",
+                description: "Sitios web modernos, responsive y optimizados para SEO",
+                price: 999,
+                icon: "fas fa-code"
+            },
+            {
+                id: 2,
+                name: "Diseño UI/UX",
+                description: "Interfaces intuitivas y experiencias de usuario excepcionales",
+                price: 799,
+                icon: "fas fa-palette"
+            },
+            {
+                id: 3,
+                name: "Marketing Digital",
+                description: "Estrategias completas para aumentar tu presencia online",
+                price: 1299,
+                icon: "fas fa-chart-line"
+            }
+        ];
+
+        let teamMembers = JSON.parse(localStorage.getItem('teamMembers')) || [
+            {
+                id: 1,
+                name: "Alex Rodríguez",
+                role: "Desarrollador Full Stack",
+                photo: null
+            },
+            {
+                id: 2,
+                name: "María González",
+                role: "Diseñadora UI/UX",
+                photo: null
+            },
+            {
+                id: 3,
+                name: "Carlos López",
+                role: "Especialista en Marketing",
+                photo: null
+            }
+        ];
+
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        function showAdminPanel() {
+            const password = prompt("Ingrese la contraseña de administrador:");
+            if (password === "admin123") {
+                document.getElementById('adminPanel').style.display = 'block';
+                showAdminTab('services');
+            } else {
+                alert("Contraseña incorrecta");
+            }
+        }
+
+        function hideAdminPanel() {
+            document.getElementById('adminPanel').style.display = 'none';
+        }
+
+        function showAdminTab(tabName) {
+            document.querySelectorAll('.admin-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            const content = document.getElementById('adminTabContent');
+            switch(tabName) {
+                case 'services':
+                    content.innerHTML = getServicesAdminHTML();
+                    break;
+                case 'team':
+                    content.innerHTML = getTeamAdminHTML();
+                    break;
+                case 'donations':
+                    content.innerHTML = getDonationsAdminHTML();
+                    break;
+                case 'settings':
+                    content.innerHTML = getSettingsAdminHTML();
+                    break;
+            }
+        }
+
+        function getServicesAdminHTML() {
+            return `
+                <h3>Gestión de Servicios y Precios</h3>
+                <div class="services-admin-list">
+                    ${services.map(service => `
+                        <div class="service-admin-item" style="background: white; padding: 1.5rem; margin: 1rem 0; border-radius: 8px;">
+                            <h4>${service.name}</h4>
+                            <p>${service.description}</p>
+                            <div class="price-editor">
+                                <input type="number" id="price-${service.id}" value="${service.price}" placeholder="Precio">
+                                <button onclick="updateServicePrice(${service.id})">Actualizar</button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function updateServicePrice(serviceId) {
+            const newPrice = parseInt(document.getElementById(`price-${serviceId}`).value);
+            const service = services.find(s => s.id === serviceId);
+            if (service && newPrice > 0) {
+                service.price = newPrice;
+                localStorage.setItem('services', JSON.stringify(services));
+                loadServices();
+                alert('Precio actualizado correctamente');
+            }
+        }
+
+        function loadServices() {
+            const grid = document.querySelector('.services-grid');
+            grid.innerHTML = services.map(service => `
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="${service.icon}"></i>
+                    </div>
+                    <h3>${service.name}</h3>
+                    <p>${service.description}</p>
+                    <div class="service-price">$${service.price}</div>
+                    <button class="cta-button" onclick="scrollToSection('contact')">Contratar</button>
+                </div>
+            `).join('');
+        }
+
+        function getTeamAdminHTML() {
+            return `
+                <h3>Gestión del Equipo</h3>
+                <div class="team-admin-list">
+                    ${teamMembers.map(member => `
+                        <div class="team-admin-item" style="background: white; padding: 1.5rem; margin: 1rem 0; border-radius: 8px;">
+                            <h4>${member.name}</h4>
+                            <p>${member.role}</p>
+                            <input type="file" id="photo-${member.id}" accept="image/*" onchange="uploadTeamPhoto(${member.id})">
+                            <label for="photo-${member.id}" class="upload-photo" style="display: inline-block; margin-top: 0.5rem;">
+                                <i class="fas fa-upload"></i> Cambiar Foto
+                            </label>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function uploadTeamPhoto(memberId) {
+            const input = document.getElementById(`photo-${memberId}`);
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const member = teamMembers.find(m => m.id === memberId);
+                    if (member) {
+                        member.photo = e.target.result;
+                        localStorage.setItem('teamMembers', JSON.stringify(teamMembers));
+                        loadTeam();
+                        alert('Foto actualizada correctamente');
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function loadTeam() {
+            const grid = document.querySelector('.team-grid');
+            grid.innerHTML = teamMembers.map(member => `
+                <div class="team-member fade-in">
+                    <div class="member-photo">
+                        ${member.photo ? 
+                            `<img src="${member.photo}" alt="${member.name}" style="width: 100%; height: 100%; object-fit: cover;">` : 
+                            `<i class="fas fa-user" style="color: var(--text-muted);"></i>`
+                        }
+                    </div>
+                    <div class="member-info">
+                        <h3>${member.name}</h3>
+                        <p>${member.role}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getDonationsAdminHTML() {
+            return `
+                <h3>Configuración de Donaciones</h3>
+                <div style="background: white; padding: 2rem; border-radius: 8px;">
+                    <p>Aquí podrás ver las donaciones recibidas cuando integremos el backend.</p>
+                    <p>Por ahora, la información bancaria se muestra estáticamente en la página.</p>
+                </div>
+            `;
+        }
+
+        function getSettingsAdminHTML() {
+            return `
+                <h3>Configuración General</h3>
+                <div style="background: white; padding: 2rem; border-radius: 8px;">
+                    <div class="form-group">
+                        <label>Cambiar Contraseña de Admin</label>
+                        <input type="password" id="newPassword" placeholder="Nueva contraseña">
+                        <button onclick="changeAdminPassword()" style="margin-top: 1rem;">Actualizar Contraseña</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function changeAdminPassword() {
+            alert("Funcionalidad disponible en la versión con backend");
+        }
+
+        function showDonationModal(amount) {
+            alert(`Redirigiendo a donación de $${amount}. Esta funcionalidad se integrará con Stripe o PayPal.`);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadServices();
+            loadTeam();
+            
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Gracias por tu mensaje. Te contactaremos pronto. (En la versión final, esto enviará un email real)');
+                this.reset();
+            });
+        });
+
+        document.getElementById('adminPanel').addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    </script>
+</body>
+</html>
